@@ -21,9 +21,11 @@ public class DetalhaLivroComAutorController {
     @GetMapping("/api/livros/{id}")
     public ResponseEntity<?> detalhaLivroComAutor(@PathVariable Long id){
 
-        DetalheLivroResponse livro = client.detalhaLivro(id).orElseThrow(() -> new ResponseStatusException(NOT_FOUND, "Não existe livro com esse id"));
+        DetalheLivroResponse livro = client.detalhaLivro(id)
+                .orElseThrow(() -> new ResponseStatusException(NOT_FOUND, "Não existe livro com esse id"));
 
-        DetalheAutorResponse autor = client.detalhaAutor(livro.getAutorId()).orElseThrow(() -> new ResponseStatusException(NOT_FOUND, "Não existe autor com esse id"));
+        DetalheAutorResponse autor = client.detalhaAutor(livro.getAutorId())
+                .orElseThrow(() -> new ResponseStatusException(NOT_FOUND, "Não existe autor com esse id"));
 
         DetalheLivroComAutorResponse livroComAutor = new DetalheLivroComAutorResponse(livro, autor);
 
